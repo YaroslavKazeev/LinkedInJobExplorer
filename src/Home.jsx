@@ -2,6 +2,7 @@ import { useState } from "react";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
+import { Search } from "lucide-react";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -74,10 +75,11 @@ export default function Home() {
             </h1>
             <div className="border-2 border-gray-400 rounded-lg p-4 bg-white max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-3 mb-3">
-                <JobTitle titleControls={titleControls} />
-                <Provinces provincesControls={provincesControls} />
+                <JobTitle />
+                <Provinces />
               </div>
               <button className="bg-blue-600 text-white px-8 py-3 rounded font-medium">
+                <Search className="inline w-4 h-4 mr-2" />
                 Search
               </button>
             </div>

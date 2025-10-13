@@ -1,7 +1,10 @@
 import { MapPin } from "lucide-react";
+import { useContext } from "react";
+import { Context } from "./App.jsx";
 
-export default function Provinces({ provincesControls }) {
-  const { provinces, selectedProvinces, toggleProvince } = provincesControls;
+export default function Provinces() {
+  const { provinces, selectedProvinces, toggleProvince } =
+    useContext(Context).provincesControls;
   return (
     <>
       <div className="md:basis-1/2 flex-1 min-w-0 border border-gray-300 rounded p-3 text-left">

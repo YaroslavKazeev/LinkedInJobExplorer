@@ -15,15 +15,10 @@ const Home = () => {
             </div>
             <div className="flex-1 mx-8">
               <div className="border border-gray-300 rounded p-2 flex items-center bg-white">
-                <Search className="w-4 h-4 mr-2" />
                 <span className="text-sm text-gray-600">
                   Software Engineer • Remote
                 </span>
-                <button className="ml-auto text-xs text-blue-600">Edit</button>
               </div>
-            </div>
-            <div className="flex gap-4 text-sm">
-              <span>Home</span>
             </div>
           </div>
         </div>

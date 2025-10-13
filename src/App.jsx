@@ -5,7 +5,7 @@ import JobListing from "./JobListing.jsx";
 import JobDetails from "./JobDetails.jsx";
 import About from "./About.jsx";
 
-const PageContext = createContext();
+const Context = createContext();
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -21,8 +21,69 @@ function App() {
     setCurrentPage,
   };
 
+  const [title, setTitle] = useState("");
+  const [titles, setTitles] = useState([]);
+
+  const addTitle = () => {
+    const t = String(title || "").trim();
+    if (!t) return;
+    setTitles((prev) => [...prev, t]);
+    setTitle("");
+  };
+  const removeTitle = (index) => {
+    setTitles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const titleControls = {
+    title,
+    setTitle,
+    titles,
+    setTitles,
+    addTitle,
+    removeTitle,
+  };
+
+  const provinces = [
+    "Drenthe",
+    "Flevoland",
+    "Friesland",
+    "Gelderland",
+    "Groningen",
+    "Limburg",
+    "North Brabant",
+    "North Holland",
+    "Overijssel",
+    "South Holland",
+    "Utrecht Area",
+    "Zeeland",
+  ];
+
+  const [selectedProvinces, setSelectedProvinces] = useState(
+    () => new Set(["Gelderland"])
+  );
+
+  const toggleProvince = (province) => {
+    setSelectedProvinces((prev) => {
+      let selProvinces = new Set(prev);
+      if (prev.has(province)) {
+        prev.size === 1 ? selProvinces : selProvinces.delete(province);
+      } else {
+        selProvinces.add(province);
+      }
+      return selProvinces;
+    });
+  };
+
+  const provincesControls = {
+    provinces,
+    selectedProvinces,
+    toggleProvince,
+  };
+
+  const allStateControls = { pageControls, titleControls, provincesControls };
+
   return (
-    <PageContext.Provider value={pageControls}>
+    <Context.Provider value={allStateControls}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,8 +92,8 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
-    </PageContext.Provider>
+    </Context.Provider>
   );
 }
 
-export { App, PageContext };
+export { App, Context };

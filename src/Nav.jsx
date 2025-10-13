@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { PageContext } from "./App.jsx";
+import { Context } from "./App.jsx";
 
 export default function Nav() {
-  const { pages, currentPage, setCurrentPage } = useContext(PageContext);
+  const { pages, currentPage, setCurrentPage } =
+    useContext(Context).pageControls;
 
   return (
     <div className="mb-6 bg-white rounded-lg shadow-sm p-4 flex items-center justify-start flex-wrap">

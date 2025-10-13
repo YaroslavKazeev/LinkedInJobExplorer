@@ -1,7 +1,10 @@
 import { GraduationCap } from "lucide-react";
+import { useContext } from "react";
+import { Context } from "./App.jsx";
 
-export default function JobTitle({ titleControls }) {
-  const { title, setTitle, addTitle, removeTitle, titles } = titleControls;
+export default function JobTitle() {
+  const { title, setTitle, addTitle, removeTitle, titles } =
+    useContext(Context).titleControls;
 
   return (
     <>
