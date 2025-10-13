@@ -1,6 +1,5 @@
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./index.css";
 import Home from "./Home.jsx";
 import JobListing from "./jobListing.jsx";
 import JobDetails from "./jobDetails.jsx";
@@ -10,9 +9,9 @@ const pageContext = createContext();
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const pages = [
-    { id: "home", name: "Home Page", route: "/" },
-    { id: "listings", name: "Job Listings", route: "/jobListing" },
-    { id: "detail", name: "Job Detail", route: "/jobDetails" },
+    { id: "home", name: "Home Page", path: "/" },
+    { id: "listings", name: "Job Listings", path: "/jobListing" },
+    { id: "detail", name: "Job Detail", path: "/jobDetails" },
   ];
   const pageControls = {
     currentPage,

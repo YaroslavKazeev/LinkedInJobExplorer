@@ -12,7 +12,7 @@ export default function Nav() {
       </h1>
       <div className="flex gap-2 flex-wrap">
         {pages.map((page) => (
-          <Link to={page.route} key={page.id}>
+          <Link to={page.path} key={page.id}>
             <button
               onClick={() => setCurrentPage(page.id)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
