@@ -52,32 +52,6 @@ const JobBoardSketches = () => {
         {/* Sketch Container */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           {currentPage === "home" && <HomePage />}
-          {currentPage === "listings" && (
-            <div className="p-8">
-              <h2 className="text-xl font-bold mb-4">
-                Listings (external route)
-              </h2>
-              <p className="mb-4 text-sm text-gray-600">
-                This view has been moved to its own route.
-              </p>
-              <Link to="/jobListing" className="text-blue-600 underline">
-                Go to Job Listings
-              </Link>
-            </div>
-          )}
-          {currentPage === "detail" && (
-            <div className="p-8">
-              <h2 className="text-xl font-bold mb-4">
-                Detail (external route)
-              </h2>
-              <p className="mb-4 text-sm text-gray-600">
-                This view has been moved to its own route.
-              </p>
-              <Link to="/jobDetails" className="text-blue-600 underline">
-                Go to Job Details
-              </Link>
-            </div>
-          )}
         </div>
       </div>
     </div>
