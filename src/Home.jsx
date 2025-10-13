@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MapPin } from "lucide-react";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
+import Provinces from "./Provinces.jsx";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -41,6 +41,28 @@ export default function Home() {
     "Zeeland",
   ];
 
+  const [selectedProvinces, setSelectedProvinces] = useState(
+    () => new Set(["Gelderland"])
+  );
+
+  const toggleProvince = (province) => {
+    setSelectedProvinces((prev) => {
+      let selProvinces = new Set(prev);
+      if (prev.has(province)) {
+        prev.size === 1 ? selProvinces : selProvinces.delete(province);
+      } else {
+        selProvinces.add(province);
+      }
+      return selProvinces;
+    });
+  };
+
+  const provincesControls = {
+    provinces,
+    selectedProvinces,
+    toggleProvince,
+  };
+
   return (
     <>
       <Nav />
@@ -52,33 +74,8 @@ export default function Home() {
             </h1>
             <div className="border-2 border-gray-400 rounded-lg p-4 bg-white max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-3 mb-3">
-                <JobTitle
-                  titleControls={titleControls}
-                  className="md:basis-1/2 flex-1 min-w-0 border border-gray-300 rounded p-3 text-left"
-                />
-                <div className="md:basis-1/2 flex-1 min-w-0 border border-gray-300 rounded p-3 text-left">
-                  <MapPin className="inline w-4 h-4 mr-2" />
-                  <span className="text-sm font-medium mb-2">
-                    Choose the convenient province(s):
-                  </span>
-                  <div className="space-y-1 text-sm">
-                    {provinces.map((province, idx) => {
-                      const id = `province-${idx}`;
-                      return (
-                        <div key={province} className="flex items-center gap-2">
-                          <input
-                            id={id}
-                            type="checkbox"
-                            className="w-4 h-4 text-blue-600 border-gray-300 rounded"
-                          />
-                          <label htmlFor={id} className="select-none">
-                            {province}
-                          </label>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+                <JobTitle titleControls={titleControls} />
+                <Provinces provincesControls={provincesControls} />
               </div>
               <button className="bg-blue-600 text-white px-8 py-3 rounded font-medium">
                 Search
