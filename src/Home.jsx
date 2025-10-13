@@ -17,9 +17,9 @@ const JobBoardSketches = () => {
   const [currentPage, setCurrentPage] = useState("home");
 
   const pages = [
-    { id: "home", name: "Home Page" },
-    { id: "listings", name: "Job Listings" },
-    { id: "detail", name: "Job Detail" },
+    { id: "home", name: "Home Page", route: "/" },
+    { id: "listings", name: "Job Listings", route: "/jobListing" },
+    { id: "detail", name: "Job Detail", route: "/jobDetails" },
   ];
 
   return (
@@ -32,17 +32,19 @@ const JobBoardSketches = () => {
           </h1>
           <div className="flex gap-2 flex-wrap">
             {pages.map((page) => (
-              <button
-                key={page.id}
-                onClick={() => setCurrentPage(page.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  currentPage === page.id
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {page.name}
-              </button>
+              <Link to={page.route}>
+                <button
+                  key={page.id}
+                  onClick={() => setCurrentPage(page.id)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    currentPage === page.id
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {page.name}
+                </button>
+              </Link>
             ))}
           </div>
         </div>
