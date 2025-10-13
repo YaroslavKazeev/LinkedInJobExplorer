@@ -11,7 +11,7 @@ function App() {
   const pages = [
     { id: "home", name: "Home Page", path: "/" },
     { id: "listings", name: "Job Listings", path: "/jobListing" },
-    { id: "detail", name: "Job Detail", path: "/jobDetails" },
+    { id: "details", name: "Job Details", path: "/jobDetails" },
   ];
   const pageControls = {
     currentPage,
