@@ -24,15 +24,9 @@ function App() {
     <pageContext.Provider value={pageControls}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home pageControls={pageControls} />} />
-          <Route
-            path="/jobListing"
-            element={<JobListing pageControls={pageControls} />}
-          />
-          <Route
-            path="/jobDetails"
-            element={<JobDetails pageControls={pageControls} />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/jobListing" element={<JobListing />} />
+          <Route path="/jobDetails" element={<JobDetails />} />
         </Routes>
       </BrowserRouter>
     </pageContext.Provider>
