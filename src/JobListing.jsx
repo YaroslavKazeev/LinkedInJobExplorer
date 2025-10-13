@@ -40,7 +40,20 @@ const Home = () => {
                 className="border-2 border-gray-300 rounded p-4 hover:border-blue-400 transition"
               >
                 <div className="flex gap-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded flex-shrink-0"></div>
+                  <div className="w-16 h-16 rounded flex-shrink-0 overflow-hidden bg-gray-100">
+                    <img
+                      src="https://media.licdn.com/dms/image/v2/C4D0BAQHDgqFdPdRu4w/company-logo_100_100/company-logo_100_100/0/1630579798078/planner_5d_logo?e=1762992000&v=beta&t=wplvmvrDfaEgKo0UWD2d5JTQ65QgQViDtZUCI5wF3os"
+                      alt="Company Logo"
+                      className="w-full h-full object-cover rounded"
+                      onError={(e) => {
+                        // If the remote CDN request is blocked (adblocker / extension),
+                        // show a neutral inline SVG placeholder instead of the blocked HTML.
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src =
+                          "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23E5E7EB'/><text x='50%' y='50%' font-size='18' text-anchor='middle' dominant-baseline='middle' fill='%23737474' font-family='Arial,Helvetica,sans-serif'>Logo</text></svg>";
+                      }}
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <div>
