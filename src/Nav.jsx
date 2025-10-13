@@ -8,7 +8,9 @@ export default function Nav() {
   return (
     <div className="mb-6 bg-white rounded-lg shadow-sm p-4 flex items-center justify-start flex-wrap">
       <Link to="/" onClick={() => setCurrentPage("home")} className="mr-4">
-        <h1 className="text-2xl font-bold text-gray-800">LinkedIn Job Explorer</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          LinkedIn Job Explorer
+        </h1>
       </Link>
       <div className="flex gap-2 flex-wrap self-center ml-auto">
         {pages.map((page) => (
