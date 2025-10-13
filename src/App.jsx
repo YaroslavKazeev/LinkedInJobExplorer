@@ -1,8 +1,8 @@
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
-import JobListing from "./jobListing.jsx";
-import JobDetails from "./jobDetails.jsx";
+import JobListing from "./JobListing.jsx";
+import JobDetails from "./JobDetails.jsx";
 import About from "./About.jsx";
 
 const PageContext = createContext();
