@@ -1,7 +1,13 @@
 import { Search, MapPin, Clock, Heart } from "lucide-react";
 import Nav from "./Nav";
+import { Context } from "./App.jsx";
+import { useContext } from "react";
 
 const Home = () => {
+  const { titleControls, provincesControls } = useContext(Context);
+  const { titles } = titleControls;
+  const { selectedProvinces } = provincesControls;
+
   return (
     <>
       <Nav />
@@ -16,7 +22,8 @@ const Home = () => {
             <div className="flex-1 mx-8">
               <div className="border border-gray-300 rounded p-2 flex items-center bg-white">
                 <span className="text-sm text-gray-600">
-                  Software Engineer • Remote
+                  {titles.join(", ")} •{" "}
+                  {Array.from(selectedProvinces).join(", ")}
                 </span>
               </div>
             </div>
