@@ -16,9 +16,9 @@ function App() {
     { id: "about", name: "About", path: "/about" },
   ];
   const pageControls = {
+    pages,
     currentPage,
     setCurrentPage,
-    pages,
   };
 
   return (

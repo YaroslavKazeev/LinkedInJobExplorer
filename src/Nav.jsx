@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { PageContext } from "./App.jsx";
 
 export default function Nav() {
-  const { currentPage, setCurrentPage, pages } = useContext(PageContext);
+  const { pages, currentPage, setCurrentPage } = useContext(PageContext);
 
   return (
     <div className="mb-6 bg-white rounded-lg shadow-sm p-4 flex items-center justify-start flex-wrap">
