@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
 import JobListing from "./jobListing.jsx";
 import JobDetails from "./jobDetails.jsx";
 
-import PageContext from "./pageContext";
+const PageContext = createContext();
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export { App, PageContext };

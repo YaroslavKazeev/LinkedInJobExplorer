@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import PageContext from "./pageContext";
+import { PageContext } from "./App.jsx";
 
 export default function Nav() {
   const { currentPage, setCurrentPage, pages } = useContext(PageContext);
