@@ -1,10 +1,10 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
 import JobListing from "./jobListing.jsx";
 import JobDetails from "./jobDetails.jsx";
 
-const pageContext = createContext();
+import PageContext from "./pageContext";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <pageContext.Provider value={pageControls}>
+    <PageContext.Provider value={pageControls}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,8 +28,8 @@ function App() {
           <Route path="/jobDetails" element={<JobDetails />} />
         </Routes>
       </BrowserRouter>
-    </pageContext.Provider>
+    </PageContext.Provider>
   );
 }
 
-export { App, pageContext };
+export default App;
