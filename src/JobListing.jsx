@@ -40,7 +40,7 @@ const JobListing = () => {
                 className="border-2 border-gray-300 rounded p-4 hover:border-blue-400 transition"
               >
                 <div className="flex gap-4">
-                  <div className="w-24 flex-col items-start justify-start space-y-1">
+                  <div className="w-28 flex-col items-start justify-start space-y-1">
                     <div className="w-16 h-16 rounded flex-shrink-0 overflow-hidden bg-gray-100 block">
                       <img
                         src="https://media.licdn.com/dms/image/v2/C4D0BAQHDgqFdPdRu4w/company-logo_100_100/company-logo_100_100/0/1630579798078/planner_5d_logo?e=1762992000&v=beta&t=wplvmvrDfaEgKo0UWD2d5JTQ65QgQViDtZUCI5wF3os"
@@ -56,7 +56,7 @@ const JobListing = () => {
                       />
                     </div>
                     <div className="text-sm text-blue-600 text-left break-words overflow-hidden">
-                      Planner 5Dlj;kkk hjgkkkkkkkkklhfluuytukyilgkj
+                      FacilityApps.com - Empower Employees
                     </div>
                   </div>
                   <div className="flex-1">
