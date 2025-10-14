@@ -73,7 +73,9 @@ export default function Skills() {
         Skills Match ({skillsInDescription.length}/{skills.length}):
       </span>
       {skillsInDescription.map((skill) => (
-        <span className="text-xs bg-gray-100 px-2 py-1 rounded">{skill}</span>
+        <span key={skill} className="text-xs bg-gray-100 px-2 py-1 rounded">
+          {skill}
+        </span>
       ))}
     </div>
   );
