@@ -29,23 +29,21 @@ export default function Tags() {
     },
   ];
   return (
-    <>
-      <div className="flex flex-wrap gap-2 mb-2">
-        {tags.map((tag) => (
-          <>
-            <span
-              id={tag.id}
-              className={`text-xs ${tag.class} text-blue-800 px-2 py-1 rounded`}
-            >
-              {tag.tagIcon} {tag.id === "employmentType" && "Full-time"}
-              {tag.id === "seniorityLevel" && "Not Applicable"}
-              {tag.id === "postedAt" && "2025-09-09"}
-              {tag.id === "applicants" && "5 applicants"}
-              {tag.id === "location" && "Amsterdam, North Holland, Netherlands"}
-            </span>
-          </>
-        ))}
-      </div>
-    </>
+    <div className="flex flex-wrap gap-2 mb-2">
+      {tags.map((tag) => (
+        <>
+          <span
+            id={tag.id}
+            className={`text-xs ${tag.class} text-blue-800 px-2 py-1 rounded`}
+          >
+            {tag.tagIcon} {tag.id === "employmentType" && "Full-time"}
+            {tag.id === "seniorityLevel" && "Not Applicable"}
+            {tag.id === "postedAt" && "2025-09-09"}
+            {tag.id === "applicants" && "5 applicants"}
+            {tag.id === "location" && "Amsterdam, North Holland, Netherlands"}
+          </span>
+        </>
+      ))}
+    </div>
   );
 }

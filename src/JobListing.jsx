@@ -1,9 +1,10 @@
-import { MapPin, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { Context } from "./App.jsx";
 import Nav from "./Nav";
 import Tags from "./Tags.jsx";
-import { Context } from "./App.jsx";
-import { useContext } from "react";
+import Skills from "./Skills.jsx";
 
 const JobListing = () => {
   const { titleControls, provincesControls } = useContext(Context);
@@ -74,24 +75,12 @@ const JobListing = () => {
                     </div>
 
                     <Tags />
-
                     <p className="text-sm text-gray-600 mb-3">
                       We're looking for an experienced engineer to join our team
                       and help build scalable solutions...
                     </p>
-
                     <div className="flex justify-between items-center">
-                      <div className="flex gap-2">
-                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">
-                          React
-                        </span>
-                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">
-                          Node.js
-                        </span>
-                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">
-                          AWS
-                        </span>
-                      </div>
+                      <Skills />
                       <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded">
                         Quick Apply
                       </button>
