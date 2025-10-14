@@ -1,12 +1,14 @@
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
+import JobListing from "./JobListing.jsx";
 import About from "./About.jsx";
 const Context = createContext();
 
 function App() {
   const pages = [
     { element: <Home />, name: "Home Page", path: "/" },
+    { element: <JobListing />, name: "Job Listing", path: "/jobListing" },
     { element: <About />, name: "About", path: "/about" },
   ];
 
