@@ -1,15 +1,14 @@
 import puppeteer from "puppeteer";
+const browser = await puppeteer.launch({
+  headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+});
+const page = await browser.newPage();
+await page.setViewport({ width: 1280, height: 900 });
 
-export async function getLinkedInSearchURLs(keywords, location) {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 900 });
-
+export async function getLinkedInSearchURL(page, jobTitle, province) {
   await page.goto(
-    `https://www.linkedin.com/jobs/search?keywords=${keywords}&location=${location}`,
+    `https://www.linkedin.com/jobs/search?keywords=${jobTitle}&location=${province}`,
     {
       headers: {
         "User-Agent":
@@ -19,11 +18,10 @@ export async function getLinkedInSearchURLs(keywords, location) {
       timeout: 30000,
     }
   );
-
-  const resultsUrl = page.url();
-  await browser.close();
-  return resultsUrl;
+  return page.url();
 }
 
-const URL = await getLinkedInSearchURLs("Web Developer", "Gelderland");
+const URL = await getLinkedInSearchURL(page, "Web Developer", "Gelderland");
 console.log("LinkedIn Search URL:", URL);
+
+await browser.close();
