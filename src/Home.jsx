@@ -1,7 +1,8 @@
+import { Search } from "lucide-react";
+
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
-import { Search } from "lucide-react";
 
 export default function Home() {
   return (
