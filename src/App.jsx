@@ -4,26 +4,18 @@ import Home from "./Home.jsx";
 import JobListing from "./JobListing.jsx";
 import JobDetails from "./JobDetails.jsx";
 import About from "./About.jsx";
-
 const Context = createContext();
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
   const pages = [
-    { id: "home", name: "Home Page", path: "/" },
-    { id: "listings", name: "Job Listings", path: "/jobListing" },
-    { id: "details", name: "Job Details", path: "/jobDetails" },
-    { id: "about", name: "About", path: "/about" },
+    { element: <Home />, name: "Home Page", path: "/" },
+    { element: <JobListing />, name: "Job Listing", path: "/jobListing" },
+    { element: <JobDetails />, name: "Job Details", path: "/jobDetails" },
+    { element: <About />, name: "About", path: "/about" },
   ];
-  const pageControls = {
-    pages,
-    currentPage,
-    setCurrentPage,
-  };
 
   const [title, setTitle] = useState("");
   const [titles, setTitles] = useState([]);
-
   const addTitle = () => {
     const t = String(title || "").trim();
     if (!t) return;
@@ -33,7 +25,6 @@ function App() {
   const removeTitle = (index) => {
     setTitles((prev) => prev.filter((_, i) => i !== index));
   };
-
   const titleControls = {
     title,
     setTitle,
@@ -57,11 +48,9 @@ function App() {
     "Utrecht Area",
     "Zeeland",
   ];
-
   const [selectedProvinces, setSelectedProvinces] = useState(
     () => new Set(["Gelderland"])
   );
-
   const toggleProvince = (province) => {
     setSelectedProvinces((prev) => {
       let selProvinces = new Set(prev);
@@ -73,23 +62,21 @@ function App() {
       return selProvinces;
     });
   };
-
   const provincesControls = {
     provinces,
     selectedProvinces,
     toggleProvince,
   };
 
-  const allStateControls = { pageControls, titleControls, provincesControls };
+  const allStateControls = { pages, titleControls, provincesControls };
 
   return (
     <Context.Provider value={allStateControls}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/jobListing" element={<JobListing />} />
-          <Route path="/jobDetails" element={<JobDetails />} />
-          <Route path="/about" element={<About />} />
+          {pages.map((page) => (
+            <Route key={page.path} path={page.path} element={page.element} />
+          ))}
         </Routes>
       </BrowserRouter>
     </Context.Provider>

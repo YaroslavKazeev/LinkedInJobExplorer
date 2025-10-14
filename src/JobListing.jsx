@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import { Context } from "./App.jsx";
 import { useContext } from "react";
 
-const Home = () => {
+const JobListing = () => {
   const { titleControls, provincesControls } = useContext(Context);
   const { titles } = titleControls;
   const { selectedProvinces } = provincesControls;
@@ -117,4 +117,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default JobListing;
