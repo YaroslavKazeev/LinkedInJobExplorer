@@ -39,31 +39,7 @@ async function trySelectorsAndSet(page, selectors, value, opts = {}) {
   throw lastErr || new Error(`No selectors provided`);
 }
 
-async function closeCookieBannerIfPresent(page) {
-  // Try common cookie banner accept buttons or consent buttons
-  const xpaths = [
-    "//button[contains(., 'Accept')]",
-    "//button[contains(., 'Agree')]",
-    "//button[contains(., 'I agree')]",
-    "//button[contains(., 'Allow all')]",
-  ];
-  for (const xp of xpaths) {
-    try {
-      const [btn] = await page.$x(xp);
-      if (btn) {
-        await btn.click();
-        // small wait to allow overlay to disappear
-        await page.waitForTimeout(500);
-        return true;
-      }
-    } catch (_e) {
-      // ignore
-    }
-  }
-  return false;
-}
-
-export async function getLinkedInSearchURLs(keywords, location) {
+export async function getLinkedInSearchURLs(keywords) {
   const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -84,9 +60,6 @@ export async function getLinkedInSearchURLs(keywords, location) {
     }
   );
 
-  // Attempt to close cookie/consent overlays that can cover inputs
-  await closeCookieBannerIfPresent(page);
-
   // Try multiple selectors for the inputs since LinkedIn changes markup frequently
   const keywordSelectors = [
     "#job-search-bar-keywords",
@@ -94,14 +67,6 @@ export async function getLinkedInSearchURLs(keywords, location) {
     'input[placeholder*="Search jobs"]',
     'input[id*="keywords"]',
     'input[name*="keywords"]',
-  ];
-  const locationSelectors = [
-    "#job-search-bar-location",
-    'input[aria-label="Location"]',
-    'input[placeholder*="Location"]',
-    'input[id*="location"]',
-    'input[id*="job-search-bar-location"]',
-    'input[name*="location"]',
   ];
 
   try {
@@ -119,22 +84,6 @@ export async function getLinkedInSearchURLs(keywords, location) {
       console.debug("screenshot failed for keywords failure");
     }
     throw new Error(`Failed to set keywords input: ${err.message}`);
-  }
-
-  try {
-    await trySelectorsAndSet(page, locationSelectors, location, {
-      timeout: 7000,
-    });
-  } catch (err) {
-    try {
-      await page.screenshot({
-        path: "debug-location-failure.png",
-        fullPage: true,
-      });
-    } catch {
-      console.debug("screenshot failed for location failure");
-    }
-    throw new Error(`Failed to set location input: ${err.message}`);
   }
 
   // Submit the form by clicking the submit button via DOM click to avoid clickablePoint
@@ -174,23 +123,5 @@ export async function getLinkedInSearchURLs(keywords, location) {
   return resultsUrl;
 }
 
-// Quick manual test when running this file directly (top-level await is allowed for ESM)
-// If run directly via `node src/getLinkedInSearchURL.js`, run a quick manual test.
-// We avoid referencing `process` in top-level expressions for stricter environments.
-const _proc =
-  typeof globalThis !== "undefined" && globalThis["process"]
-    ? globalThis["process"]
-    : undefined;
-const _thisFile = (_proc && _proc.argv && _proc.argv[1]) || "";
-if (_thisFile && _thisFile.endsWith("getLinkedInSearchURL.js")) {
-  try {
-    const URL = await getLinkedInSearchURLs(
-      "Web Developer",
-      "Ede, Gelderland, Netherlands"
-    );
-    console.log("LinkedIn Search URL:", URL);
-  } catch (e) {
-    console.error(e);
-    if (_proc && _proc.exit) _proc.exit(1);
-  }
-}
+const URL = await getLinkedInSearchURLs("Web Developer");
+console.log("LinkedIn Search URL:", URL);
