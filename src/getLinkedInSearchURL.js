@@ -6,15 +6,15 @@ export async function getLinkedInSearchURLs(keywords, location) {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
-  // Use a regular user agent to reduce bot detection
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-  );
   await page.setViewport({ width: 1280, height: 900 });
 
   await page.goto(
     `https://www.linkedin.com/jobs/search?keywords=${keywords}&location=${location}`,
     {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
       waitUntil: "networkidle2",
       timeout: 30000,
     }
