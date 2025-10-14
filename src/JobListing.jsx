@@ -1,5 +1,7 @@
 import { MapPin, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import Nav from "./Nav";
+import Tags from "./Tags.jsx";
 import { Context } from "./App.jsx";
 import { useContext } from "react";
 
@@ -40,7 +42,10 @@ const JobListing = () => {
                 className="border-2 border-gray-300 rounded p-4 hover:border-blue-400 transition"
               >
                 <div className="flex gap-4">
-                  <div className="w-28 flex-col items-start justify-start space-y-1">
+                  <Link
+                    to="https://lt.linkedin.com/company/planner-5d?trk=public_jobs_jserp-result_job-search-card-subtitle"
+                    className="w-28 flex-col items-start justify-start space-y-1"
+                  >
                     <div className="w-16 h-16 rounded flex-shrink-0 overflow-hidden bg-gray-100 block">
                       <img
                         src="https://media.licdn.com/dms/image/v2/C4D0BAQHDgqFdPdRu4w/company-logo_100_100/company-logo_100_100/0/1630579798078/planner_5d_logo?e=1762992000&v=beta&t=wplvmvrDfaEgKo0UWD2d5JTQ65QgQViDtZUCI5wF3os"
@@ -58,7 +63,7 @@ const JobListing = () => {
                     <div className="text-sm text-blue-600 text-left break-words overflow-hidden">
                       FacilityApps.com - Empower Employees
                     </div>
-                  </div>
+                  </Link>
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <div>
@@ -68,24 +73,7 @@ const JobListing = () => {
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                        Remote
-                      </span>
-                      <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
-                        Full-time
-                      </span>
-                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                        $120k-$180k
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
-                      <MapPin className="w-3 h-3" />
-                      <span>San Francisco, CA • Remote OK</span>
-                      <Clock className="w-3 h-3 ml-2" />
-                      <span>2 hours ago</span>
-                    </div>
+                    <Tags />
 
                     <p className="text-sm text-gray-600 mb-3">
                       We're looking for an experienced engineer to join our team
