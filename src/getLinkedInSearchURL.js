@@ -74,16 +74,7 @@ export async function getLinkedInSearchURLs(keywords) {
       timeout: 7000,
     });
   } catch (err) {
-    // Take a screenshot for debugging and include it in the error
-    try {
-      await page.screenshot({
-        path: "debug-keywords-failure.png",
-        fullPage: true,
-      });
-    } catch {
-      console.debug("screenshot failed for keywords failure");
-    }
-    throw new Error(`Failed to set keywords input: ${err.message}`);
+    console.log(err);
   }
 
   // Submit the form by clicking the submit button via DOM click to avoid clickablePoint
@@ -97,7 +88,8 @@ export async function getLinkedInSearchURLs(keywords) {
       page.waitForNavigation({ waitUntil: "networkidle2", timeout: 30000 }),
     ]);
   } catch (err) {
-    // try an alternative: press Enter in the keywords input
+    console.log(err);
+    console.log("\nSubmit button click failed, trying Enter keypress");
     try {
       await page.keyboard.press("Enter");
       await page.waitForNavigation({
@@ -105,20 +97,12 @@ export async function getLinkedInSearchURLs(keywords) {
         timeout: 30000,
       });
     } catch (err2) {
-      await page
-        .screenshot({ path: "debug-submit-failure.png", fullPage: true })
-        .catch(() => {
-          console.debug("screenshot failed for submit");
-        });
-      throw new Error(
-        `Failed to submit search: ${err.message}; fallback: ${err2.message}`
-      );
+      console.log(err2);
+      console.log("\nSubmit Enter keypress fallback also failed");
     }
   }
 
-  // Get the current URL (search results page)
   const resultsUrl = page.url();
-
   await browser.close();
   return resultsUrl;
 }
