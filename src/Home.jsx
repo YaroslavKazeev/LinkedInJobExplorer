@@ -1,69 +1,10 @@
-import { useState } from "react";
+import { Search } from "lucide-react";
+
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
-import { Search } from "lucide-react";
 
 export default function Home() {
-  const [title, setTitle] = useState("");
-  const [titles, setTitles] = useState([]);
-
-  const addTitle = () => {
-    const t = String(title || "").trim();
-    if (!t) return;
-    setTitles((prev) => [...prev, t]);
-    setTitle("");
-  };
-  const removeTitle = (index) => {
-    setTitles((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const titleControls = {
-    title,
-    setTitle,
-    titles,
-    setTitles,
-    addTitle,
-    removeTitle,
-  };
-
-  const provinces = [
-    "Drenthe",
-    "Flevoland",
-    "Friesland",
-    "Gelderland",
-    "Groningen",
-    "Limburg",
-    "North Brabant",
-    "North Holland",
-    "Overijssel",
-    "South Holland",
-    "Utrecht Area",
-    "Zeeland",
-  ];
-
-  const [selectedProvinces, setSelectedProvinces] = useState(
-    () => new Set(["Gelderland"])
-  );
-
-  const toggleProvince = (province) => {
-    setSelectedProvinces((prev) => {
-      let selProvinces = new Set(prev);
-      if (prev.has(province)) {
-        prev.size === 1 ? selProvinces : selProvinces.delete(province);
-      } else {
-        selProvinces.add(province);
-      }
-      return selProvinces;
-    });
-  };
-
-  const provincesControls = {
-    provinces,
-    selectedProvinces,
-    toggleProvince,
-  };
-
   return (
     <>
       <Nav />

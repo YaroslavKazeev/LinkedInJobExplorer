@@ -1,20 +1,5 @@
 export default function Skills() {
-  const skills = [
-    "SQL",
-    "MongoDB",
-    "JavaScript",
-    "HTML",
-    "CSS",
-    "React",
-    "Node",
-    "Express",
-    "Python",
-    "Django",
-    "Git",
-    "GitHub",
-    "Agile",
-    "Scrum",
-  ];
+  const skills = JSON.parse(import.meta.env.VITE_MY_SKILLS);
   const vacancy = {
     id: "4239791693",
     trackingId: "54OyAU0MrMznziQdhR4aWw==",
