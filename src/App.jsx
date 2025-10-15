@@ -46,8 +46,11 @@ function App() {
     "Utrecht Area",
     "Zeeland",
   ];
+  const myHomeProvinceNumber = JSON.parse(
+    import.meta.env.VITE_MY_HOME_PROVINCE_NUMBER
+  );
   const [selectedProvinces, setSelectedProvinces] = useState(
-    () => new Set(["Gelderland"])
+    () => new Set([provinces[myHomeProvinceNumber]])
   );
   const toggleProvince = (province) => {
     setSelectedProvinces((prev) => {
