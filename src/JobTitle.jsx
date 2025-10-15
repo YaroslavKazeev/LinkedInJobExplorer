@@ -1,5 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import { useContext } from "react";
+
 import { Context } from "./App.jsx";
 
 export default function JobTitle() {
@@ -33,7 +34,9 @@ export default function JobTitle() {
         {/* Container for added titles (paragraphs will be appended here) */}
         <div className="mt-3 space-y-2" aria-live="polite">
           {titles.length === 0 ? (
-            <p className="text-sm text-gray-500">No job titles added yet.</p>
+            <p className="text-sm text-gray-500">
+              At least one job title is required for the search.
+            </p>
           ) : (
             titles.map((t, i) => (
               <div

@@ -69,7 +69,15 @@ function App() {
     toggleProvince,
   };
 
-  const allStateControls = { pages, titleControls, provincesControls };
+  const [runs, setRuns] = useState([{}]);
+  const runsControls = { runs, setRuns };
+
+  const allStateControls = {
+    pages,
+    titleControls,
+    provincesControls,
+    runsControls,
+  };
 
   return (
     <Context.Provider value={allStateControls}>
