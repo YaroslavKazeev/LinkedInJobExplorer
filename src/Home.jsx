@@ -28,6 +28,7 @@ export default function Home() {
         });
       });
       setRuns(newRuns);
+      console.log("New runs set:", newRuns);
     }
   };
   return (
