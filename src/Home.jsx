@@ -1,14 +1,16 @@
 import { Search } from "lucide-react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { Context } from "./App.jsx";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
-import { useContext } from "react";
-import { Context } from "./App.jsx";
 
 export default function Home() {
   const { titleControls, provincesControls, runsControls } =
     useContext(Context);
+  const navigate = useNavigate();
   const { titles } = titleControls;
   const { selectedProvinces } = provincesControls;
   const { setRuns } = runsControls;
@@ -28,7 +30,7 @@ export default function Home() {
         });
       });
       setRuns(newRuns);
-      console.log("New runs set:", newRuns);
+      navigate("/jobListing");
     }
   };
   return (

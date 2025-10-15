@@ -19,13 +19,9 @@ async function sleep(ms) {
  * - options: optional object with pollIntervalMs and waitTimeoutMs.
  *
  * Usage example:
- *   const { items, run } = await fetchLinkedInActorResults(token, url);
+ *   const { items, run } = await fetchJobDetails(token, url);
  */
-export default async function fetchLinkedInActorResults(
-  token,
-  startUrl,
-  options = {}
-) {
+export default async function fetchJobDetails(token, startUrl, options = {}) {
   if (!token || typeof token !== "string") {
     throw new TypeError("Apify API token (string) is required");
   }
@@ -165,7 +161,7 @@ const token = JSON.parse(import.meta.env.VITE_LINKEDIN_API_TOKEN);
 const url =
   "https://www.linkedin.com/jobs/search?keywords=Web%20Developer&location=Drenthe";
 
-const { items, run } = await fetchLinkedInActorResults(token, url);
+const { items, run } = await fetchJobDetails(token, url);
 console.log("Run finished:", run.data.id, run.data.status);
 console.log("Items count:", items.length);
 console.log(items.slice(0, 1));

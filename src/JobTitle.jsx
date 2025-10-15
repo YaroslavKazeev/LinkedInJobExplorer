@@ -1,5 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import { useContext } from "react";
+
 import { Context } from "./App.jsx";
 
 export default function JobTitle() {
