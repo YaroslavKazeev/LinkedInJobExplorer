@@ -4,6 +4,21 @@ import Home from "./Home.jsx";
 import JobListing from "./JobListing.jsx";
 import About from "./About.jsx";
 const Context = createContext();
+const provinces = [
+  "Drenthe",
+  "Flevoland",
+  "Friesland",
+  "Gelderland",
+  "Groningen",
+  "Limburg",
+  "North Brabant",
+  "North Holland",
+  "Overijssel",
+  "South Holland",
+  "Utrecht Area",
+  "Zeeland",
+];
+const token = import.meta.env.VITE_LINKEDIN_API_TOKEN;
 
 function App() {
   const pages = [
@@ -32,20 +47,6 @@ function App() {
     removeTitle,
   };
 
-  const provinces = [
-    "Drenthe",
-    "Flevoland",
-    "Friesland",
-    "Gelderland",
-    "Groningen",
-    "Limburg",
-    "North Brabant",
-    "North Holland",
-    "Overijssel",
-    "South Holland",
-    "Utrecht Area",
-    "Zeeland",
-  ];
   const myHomeProvinceNumber = JSON.parse(
     import.meta.env.VITE_MY_HOME_PROVINCE_NUMBER
   );
@@ -77,6 +78,7 @@ function App() {
     titleControls,
     provincesControls,
     runsControls,
+    token,
   };
 
   return (
