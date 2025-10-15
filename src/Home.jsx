@@ -3,8 +3,33 @@ import { Search } from "lucide-react";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
+import { useContext } from "react";
+import { Context } from "./App.jsx";
 
 export default function Home() {
+  const { titleControls, provincesControls, runsControls } =
+    useContext(Context);
+  const { titles } = titleControls;
+  const { selectedProvinces } = provincesControls;
+  const { setRuns } = runsControls;
+  const handleSearch = () => {
+    const selProv = Array.from(selectedProvinces);
+    const newRuns = [];
+    if (titles.length !== 0) {
+      titles.forEach((t) => {
+        selProv.forEach((p) => {
+          newRuns.push({
+            title: t,
+            selProvince: p,
+            runUrl: `https://www.linkedin.com/jobs/search?keywords=${encodeURIComponent(
+              t
+            )}&location=${encodeURIComponent(p)}`,
+          });
+        });
+      });
+      setRuns(newRuns);
+    }
+  };
   return (
     <>
       <Nav />
@@ -19,7 +44,10 @@ export default function Home() {
                 <JobTitle />
                 <Provinces />
               </div>
-              <button className="bg-blue-600 text-white px-8 py-3 rounded font-medium">
+              <button
+                onClick={() => handleSearch()}
+                className="bg-blue-600 text-white px-8 py-3 rounded font-medium"
+              >
                 <Search className="inline w-4 h-4 mr-2" />
                 Search
               </button>
