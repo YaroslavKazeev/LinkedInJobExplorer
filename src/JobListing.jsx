@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import DOMPurify from "dompurify";
 
 import { Context } from "./App.jsx";
