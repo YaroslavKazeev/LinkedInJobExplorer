@@ -70,7 +70,7 @@ function App() {
     toggleProvince,
   };
 
-  const [runs, setRuns] = useState([{}]);
+  const [runs, setRuns] = useState([]);
   const runsControls = { runs, setRuns };
 
   const allStateControls = {

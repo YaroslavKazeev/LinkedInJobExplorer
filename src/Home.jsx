@@ -1,19 +1,20 @@
 import { Search } from "lucide-react";
-import { useContext } from "react";
+import { use, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Context } from "./App.jsx";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
+import fetchJobDetails from "./fetchJobDetails.js";
 
 export default function Home() {
-  const { titleControls, provincesControls, runsControls } =
+  const { titleControls, provincesControls, runsControls, token } =
     useContext(Context);
   const navigate = useNavigate();
   const { titles } = titleControls;
   const { selectedProvinces } = provincesControls;
-  const { setRuns } = runsControls;
+  const { runs, setRuns } = runsControls;
   const handleSearch = () => {
     const selProv = Array.from(selectedProvinces);
     const newRuns = [];
@@ -26,6 +27,7 @@ export default function Home() {
             runUrl: `https://www.linkedin.com/jobs/search?keywords=${encodeURIComponent(
               t
             )}&location=${encodeURIComponent(p)}`,
+            status: { loading: true, error: null, data: null },
           });
         });
       });
@@ -33,6 +35,26 @@ export default function Home() {
       navigate("/jobListing");
     }
   };
+  useEffect(() => {
+    (async () => {
+      console.log("Effect triggered for runs change:", runs);
+      if (runs.length === 0) return;
+      Promise.all(
+        runs.map(async (run, i) => {
+          const status = await fetchJobDetails(token, run.runUrl);
+          console.log("Fetched status:", JSON.stringify(status, null, 2));
+          setRuns((prev) => {
+            const { data, error } = status;
+            const newRuns = [...prev];
+            newRuns[i].status = { loading: false, error, data };
+            console.log(data ? data[0] : "No data available");
+            return newRuns;
+          });
+          console.log("Completed fetch for run:", i, run.runUrl);
+        })
+      );
+    })();
+  }, [runs]);
   return (
     <>
       <Nav />
