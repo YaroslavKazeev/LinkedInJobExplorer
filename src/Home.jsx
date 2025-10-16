@@ -26,13 +26,16 @@ export default function Home() {
             runUrl: `https://www.linkedin.com/jobs/search?keywords=${encodeURIComponent(
               t
             )}&location=${encodeURIComponent(p)}`,
+            status: { loading: false, error: null, data: null },
           });
         });
       });
       setRuns(newRuns);
+
       navigate("/jobListing");
     }
   };
+
   return (
     <>
       <Nav />
