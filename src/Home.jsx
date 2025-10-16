@@ -37,7 +37,6 @@ export default function Home() {
   };
   useEffect(() => {
     (async () => {
-      console.log("Effect triggered for runs change:", runs);
       if (runs.length === 0) return;
       Promise.all(
         runs.map(async (run, i) => {
@@ -47,10 +46,9 @@ export default function Home() {
             const { data, error } = status;
             const newRuns = [...prev];
             newRuns[i].status = { loading: false, error, data };
-            console.log(data ? data[0] : "No data available");
             return newRuns;
           });
-          console.log("Completed fetch for run:", i, run.runUrl);
+          console.log("Completed fetch for", run.title, "in", run.selProvince);
         })
       );
     })();
