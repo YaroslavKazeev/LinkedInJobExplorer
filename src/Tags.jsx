@@ -1,6 +1,6 @@
 import { MapPin, Clock, Monitor, Briefcase, UserCheck } from "lucide-react";
 
-export default function Tags() {
+export default function Tags({ item }) {
   const tags = [
     {
       id: "employmentType",
@@ -35,11 +35,11 @@ export default function Tags() {
           key={tag.id}
           className={`text-xs ${tag.class} text-blue-800 px-2 py-1 rounded`}
         >
-          {tag.tagIcon} {tag.id === "employmentType" && "Full-time"}
-          {tag.id === "seniorityLevel" && "Not Applicable"}
-          {tag.id === "postedAt" && "2025-09-09"}
-          {tag.id === "applicants" && "5 applicants"}
-          {tag.id === "location" && "Amsterdam, North Holland, Netherlands"}
+          {tag.tagIcon} {tag.id === "employmentType" && item.employmentType}
+          {tag.id === "seniorityLevel" && item.seniorityLevel}
+          {tag.id === "postedAt" && item.postedAt}
+          {tag.id === "applicants" && `${item.applicantsCount} applicants`}
+          {tag.id === "location" && item.location}
         </span>
       ))}
     </div>

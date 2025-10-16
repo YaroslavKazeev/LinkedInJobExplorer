@@ -1,20 +1,19 @@
 import { Search } from "lucide-react";
-import { use, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Context } from "./App.jsx";
 import Nav from "./Nav";
 import JobTitle from "./JobTitle.jsx";
 import Provinces from "./Provinces.jsx";
-import fetchJobDetails from "./fetchJobDetails.js";
 
 export default function Home() {
-  const { titleControls, provincesControls, runsControls, token } =
+  const { titleControls, provincesControls, runsControls } =
     useContext(Context);
   const navigate = useNavigate();
   const { titles } = titleControls;
   const { selectedProvinces } = provincesControls;
-  const { runs, setRuns } = runsControls;
+  const { setRuns } = runsControls;
   const handleSearch = () => {
     const selProv = Array.from(selectedProvinces);
     const newRuns = [];
@@ -27,32 +26,16 @@ export default function Home() {
             runUrl: `https://www.linkedin.com/jobs/search?keywords=${encodeURIComponent(
               t
             )}&location=${encodeURIComponent(p)}`,
-            status: { loading: true, error: null, data: null },
+            status: { loading: false, error: null, data: null },
           });
         });
       });
       setRuns(newRuns);
+
       navigate("/jobListing");
     }
   };
-  useEffect(() => {
-    (async () => {
-      if (runs.length === 0) return;
-      Promise.all(
-        runs.map(async (run, i) => {
-          const status = await fetchJobDetails(token, run.runUrl);
-          console.log("Fetched status:", JSON.stringify(status, null, 2));
-          setRuns((prev) => {
-            const { data, error } = status;
-            const newRuns = [...prev];
-            newRuns[i].status = { loading: false, error, data };
-            return newRuns;
-          });
-          console.log("Completed fetch for", run.title, "in", run.selProvince);
-        })
-      );
-    })();
-  }, [runs]);
+
   return (
     <>
       <Nav />

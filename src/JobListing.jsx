@@ -1,26 +1,66 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import DOMPurify from "dompurify";
 
 import { Context } from "./App.jsx";
 import Nav from "./Nav";
 import Tags from "./Tags.jsx";
 import Skills from "./Skills.jsx";
+import fetchJobDetails from "./fetchJobDetails.js";
+
 let output;
 let preOutput = [];
 
 export default function JobListing() {
-  const { titleControls, provincesControls } = useContext(Context);
+  const { titleControls, provincesControls, runsControls, token } =
+    useContext(Context);
   const { titles } = titleControls;
   const { selectedProvinces } = provincesControls;
-  const { runs } = useContext(Context).runsControls;
+  const { runs, setRuns } = runsControls;
+
+  useEffect(() => {
+    (async () => {
+      if (
+        runs.length === 0 ||
+        runs.some((r) => r.status.loading) ||
+        runs.every(
+          (r) => !r.status.loading && (r.status.error || r.status.data)
+        )
+      )
+        return;
+
+      runs.map(async (run, i) => {
+        setRuns((prev) => {
+          const newRuns = [...prev];
+          newRuns[i].status.loading = true;
+          return newRuns;
+        });
+
+        Promise.all(
+          runs.map(async (run, i) => {
+            const status = await fetchJobDetails(token, run.runUrl);
+            setRuns((prev) => {
+              const { data, error } = status;
+              const newRuns = [...prev];
+              newRuns[i].status = { loading: false, error, data };
+              return newRuns;
+            });
+            console.log(
+              "Completed fetch for",
+              run.title,
+              "in",
+              run.selProvince
+            );
+          })
+        );
+      });
+    })();
+  }, [runs]);
 
   if (!titles || titles.length === 0) {
     output = <p>Some data should be fetched first</p>;
   } else if (runs.some((run) => run.status.data)) {
     for (const run of runs) {
-      console.log("Processing run:", run.status.data);
-      console.log("Runs", JSON.stringify(runs, null, 2));
       preOutput.push(
         run.status.data.map((item) => (
           <div
@@ -54,7 +94,7 @@ export default function JobListing() {
                 <div className="flex justify-between items-start">
                   <h3 className="font-bold text-lg mb-1">{item.title}</h3>
                 </div>
-                <Tags />
+                <Tags item={item} />
                 <div
                   className="text-sm text-gray-600 mb-3"
                   // Render the job description HTML. Sanitize using DOMPurify to avoid XSS.
@@ -65,7 +105,7 @@ export default function JobListing() {
                   }}
                 ></div>
                 <div className="flex justify-between items-center">
-                  <Skills />
+                  <Skills item={item} />
                   <Link to={item.link}>
                     <button className="bg-blue-500 text-white text-sm px-1 py-1 rounded inline-flex items-center">
                       <span className="ml-2">...More &amp; Apply </span>
